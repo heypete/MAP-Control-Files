@@ -1,0 +1,66 @@
+{ Fast-Cal Ar in MAP}
+{ Plus Residual }
+{ 3.05.2012}
+{--------------------------}
+display Magnet_Setup  is running
+measure run magnet_setup.msr
+timer halt
+
+wait 0:02
+valve close all
+output extension AR
+wait 0:10
+display    CL S4,S8   S10,S11 CL?
+
+{FastCal Ar in MAP, bottle 3}
+wait 0:30
+valve open 0
+wait 0:20
+valve close 0
+display Check valves !
+wait 0:20
+valve open 1
+wait 0:20
+valve close 1
+display Valves OK?
+wait 0:15
+
+header type F
+header bottle 3
+header dilution 0.999502292
+header cal +1
+
+wait 0:15
+display CL S2
+wait 0:30
+display OP S1
+event inlet
+wait 0:02
+
+measure run sc_Ar.msr
+
+timer halt
+display CL S1
+wait 0:10
+
+display OP S4, S8
+wait 0:10
+display WAIT UNTIL END OF FC THEN PRESS GO
+timer halt
+
+
+{Residual in MAP}
+{---------------}
+header type R
+wait 5:00
+display CL S2
+event closure
+wait 0:10
+header type R
+event inlet
+
+measure run r2_ar.msr
+wait 0:30
+timer halt
+display   valves to IC  OP S2
+close

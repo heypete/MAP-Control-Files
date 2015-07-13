@@ -1,0 +1,103 @@
+{ Slow calibaration C_KrXe in MAP 215-50}
+{ 29.08.2012}
+{--------------------------}
+
+display Magnet_Setup  is running
+measure run magnet_setup.msr
+
+at 0:02
+valve close all  
+wait 1:00
+display  LN2 to COAL 10
+wait 5:00
+display    refill Ln2   COAL 10   
+wait 5:00
+display    refill Ln2   COAL 10   
+wait 2:00
+display   close valves  5,6,7,8,9,13,15
+wait 2:00
+display   close valves  S4,S8
+wait 0:30
+valve open 110
+wait 0:02
+{SlowCal KrXe in MAP, bottle 8}
+
+valve open 102
+display open back
+wait 0:30
+valve close 102
+display close back
+wait 0:10
+display Check Valve
+wait 0:30
+valve open 103
+display open front
+wait 0:30
+valve close 103
+display close front
+wait 0:10
+display Check Valve
+wait 0:30
+
+header type C
+header bottle 8
+header dilution .9994943
+header  cal +1
+
+wait 0:05
+display    refill Ln2   COAL 10
+wait 5:00
+display    refill Ln2   COAL 10
+wait 5:00
+display    refill Ln2   COAL 10
+wait 5:00
+display    refill Ln2   COAL 10
+wait 5:00
+display    refill Ln2   COAL 10
+wait 2:00
+display    close valve 10
+wait 0:15
+valve close 110
+wait 0:05
+display    open valves   S4,S8,13,15
+wait 1:00
+display    open valves   5,6,7,8,9
+wait 1:00
+display coal 10 to 180°C
+wait 15:00
+
+output extension KX
+header type C
+wait 0:02
+
+display    close valves   5,6,7,8,9
+wait 1:20   
+display  CL 13,15
+wait 0:30
+display  open valve 10
+wait 0:15
+display  CL S8, S4, S7
+wait 1:00
+valve open 110
+wait 0:05
+display  CL S2
+wait 0:30
+display  OP S1
+wait 0:02
+event inlet
+
+measure run sc_KrXe.msr
+
+timer halt
+
+display CL S1
+wait 0:15
+valve close 110
+wait 0:05
+display OP S8, S4, S7
+wait 1:00
+display OP 13,15
+wait 0:30
+display OP 5,6,7,8,9
+wait 1:00
+display WAIT FOR END OF KR,XE

@@ -1,0 +1,20 @@
+
+field Ar36C 5.0
+wait 2
+field Ar36C -5.0
+wait 2
+field Ar36C 3.0
+wait 2
+field Ar36C -3.0
+wait 2
+field Ar36C 1.0
+wait 2
+field Ar36C -1.0
+wait 2
+field Ar36C 0.5
+wait 2
+field Ar36C -0.5
+wait 2
+field Ar36C
+
+close

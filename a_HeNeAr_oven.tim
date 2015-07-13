@@ -1,0 +1,102 @@
+{ Sample S_HeNeAr_Oven in MAP}
+{ 10.08.2012}
+{--------------------------}
+
+display Magnet_Setup  is running
+measure run magnet_setup.msr
+
+at 0:02
+valve close all
+at 0:10
+display    SET-UP OVEN  CL OVEN TURBO
+at 1:00
+display   close valves  2,4,10,11
+at 2:00
+display open valve 3
+at 2:15
+display  Drop Al in oven 
+at 3:00
+display     Heat oven    When 500C TG
+{Heat oven to desired temperature. Wait. When cycle is done and cooling...}
+{...wait until it cools to 500C then press Timer Go.}
+at 4:30
+display  LN2 to COAL10  Remember refill
+timer halt
+display   Open valve 10, LN2 to COAL S4
+wait 5:00
+display Refill COAL10,S4
+wait 5:00
+display refill COAL10,S4
+wait 5:00
+display close valve 10
+wait 0:15
+display   close valves   13,15,S8
+wait 1:00
+display open valve 11
+wait 0:15
+
+header type A
+output extension HN
+
+valve open 110
+wait 0:02
+display close valve S2
+wait 0:30
+display open valve S1
+wait 0:15
+event inlet
+wait 0:02
+
+measure run a_HeNe.msr
+
+timer halt
+
+display valve close S5
+wait 0:30
+valve close 110
+wait 0:02
+display open valve S8
+wait 0:15
+display close valve 3
+wait 0:15
+display open oven turbo
+wait 0:45
+display   open valves   2,4,13,15
+wait 1:15
+display COAL10 to 180°C
+wait 4:00
+display Open MAP tank (#2)
+wait 1:00
+timer halt
+display    close valves 5,13,15
+wait 1:00
+display open valve  10  
+wait 5:00
+
+header type A
+output extension AR
+
+display   close valves  S4,S7,S8
+wait 1:00
+valve open 110
+wait 0:02
+display close valve S2
+wait 0:30
+display open valve S1
+wait 0:15
+event inlet 
+wait 0:02
+
+measure run a_Ar.msr
+
+timer halt
+
+display CL S1
+wait 0:20
+valve close 110
+wait 0:02
+display    open valves   S8,S4,S7
+wait 1:00
+display    open valves   5,13,15
+wait 1:00
+display Wait until end of AR

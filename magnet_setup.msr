@@ -1,0 +1,21 @@
+mul off
+
+repeat
+
+field H2C
+wait 4.
+field HO18C
+wait 4.
+field Ne22C
+wait 4.
+field Ar40C
+wait 4.
+field Kr84C
+wait 4.
+field Xe132C
+wait 4.
+
+until 5
+field H2C -0.2
+close
+

@@ -1,0 +1,16 @@
+repeat
+
+field H2C -0.2
+wait 1
+field H2C 0.1
+wait 1
+field H2C -0.1
+wait 1
+field H2C 0.1
+wait 1
+field H2C
+
+until 3
+
+measure go
+close

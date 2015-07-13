@@ -1,0 +1,322 @@
+{Ar SlowCalin MAP 215-50}
+{Faraday: Ar36F, Ar38F, Ar40F}
+{Counter Ar36C, Ar38C}
+{+Background CL35C, CL37C, CO44C} 
+{Version: 17.08.2012 by Ingo}
+{----------------------}
+
+program
+
+frame
+
+multiplier off
+
+collector F
+low F 5E-4
+
+collector F
+high C 1E6
+
+collector C
+high C 1E6
+
+{Define items}
+{------------}
+
+item HO18C:
+try = true
+gate = 1
+wait = 5
+
+item Ne20C:
+try = true
+gate = 1
+wait = 2
+
+item Ne22C:
+try = true
+gate = 1
+wait = 2
+
+item Ar36C:
+try =  true
+gate = 1
+wait = 3
+
+item Ar40C:
+try = true
+gate = 1
+wait = 3
+
+item Ar40F:
+try = true
+gate = 1
+wait = 3
+
+item CO44C:
+try =  true
+gate = 1
+wait = 3
+
+wait 0:30
+display ready for event separation? 3min
+wait 2:30
+event separation
+timer go
+
+
+{first serious step, balance and center water, neon, and Ar isotopes}
+{----------------------------------------------------------}
+
+item HO18C
+field HO18C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false  
+   balance HO18C -0.05 +0.05 mass 6
+center HO18C 5E3
+center HO18C 5E3
+gate HO18C 1E5 2.
+peak HO18C
+print HO18C
+field HO18C +0.1 mass
+wait 1.
+zero HO18C +0.1 mass
+multiplier off
+
+item Ne20C
+field Ne20C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance Ne20C -0.15 +0.15 mass 10
+center Ne20c 1E2
+center Ne20C 1E2
+gate Ne20C 1E6 5.
+peak Ne20C
+field Ne20C +0.1 mass
+wait 1.
+zero Ne20C +0.1 mass
+print Ne20c
+multiplier off
+
+item Ne22C
+field Ne22C
+wait = 2.
+gate = 0.1
+collector F
+   checked =  false
+   balance Ne22C -0.1 +0.1 mass 15
+center Ne22C 1E2
+center Ne22C 1E2
+gate Ne22C 1E6 5
+peak Ne22C
+field Ne22C +0.1 mass
+wait 1.
+zero Ne22C +0.1 mass
+print Ne22C
+multiplier off
+
+call dem_Ar36C.msr
+
+item Ar40F
+field Ar40F
+wait 2
+gate = 0.1
+collector C
+  checked = false
+  balance Ar40F -0.2 +0.2 mass 15
+center Ar40F 1E-3
+center Ar40F 1E-3
+gate = 4
+peak Ar40F
+field Ar40F +0.2 mass
+wait 1.
+zero Ar40F  +0.2 mass
+print Ar40F
+
+item Ar36C
+field Ar36C
+wait 2
+gate = 0.1
+collector F
+  checked = false
+  balance Ar36C -0.3 +0.3 mass 10
+center Ar36C 1E2
+center Ar36C 1E2 
+gate Ar36C 1E6 5
+peak Ar36C
+field Ar36C +0.2 mass
+wait 1.
+zero Ar36C +0.2 mass
+print Ar36C
+multiplier off
+
+item Ar40C
+field Ar40C
+wait 3
+gate = 0.1
+   collector F
+   checked = false
+   balance Ar40C -0.1 +0.1 mass 4
+center Ar40C 5E2
+center Ar40C 5E2
+gate Ar40C 1E5 5.
+peak Ar40C
+field Ar40C +0.2 mass
+wait 1.
+zero Ar40C +0.2 mass
+multiplier off
+
+item CO44C
+field CO44C
+wait = 2.
+gate = 0.1
+collector F
+   checked =  false
+   balance CO44C -0.1 +0.1 mass 15
+center CO44C 5E2
+center CO44C 5E2
+gate CO44C 1E4 5.
+peak CO44C
+field CO44C +0.1 mass
+wait 1.
+zero CO44C +0.1 mass
+print CO44C
+multiplier off
+
+{6 cycles}
+{--------}
+
+repeat
+
+item HO18C
+field HO18C
+wait = 2.
+center HO18C 5E3
+center HO18C 5E3
+   failure display     HO18C not    centered
+gate HO18C 1E5 2.
+peak HO18C
+print HO18C
+field HO18C +0.1 mass
+wait 1.
+zero HO18C +0.1 mass
+multiplier off
+
+item Ne20C
+field Ne20C
+wait = 2.
+center Ne20c 1E2
+center Ne20C 1E2
+   failure display     Ne20C not    centered
+gate Ne20C 1E6 5.
+peak Ne20C
+field Ne20C +0.1 mass
+wait 1.
+zero Ne20C +0.1 mass
+print Ne20c
+multiplier off
+
+item Ne22C
+field Ne22C
+wait = 2.
+gate = 0.1
+collector F
+   checked =  false
+   balance Ne22C -0.1 +0.1 mass 15
+center Ne22C 1E2
+center Ne22C 1E2
+gate Ne22C 1E6 5
+peak Ne22C
+field Ne22C +0.1 mass
+wait 1.
+zero Ne22C +0.1 mass
+print Ne22C
+multiplier off
+
+call dem_Ar36C.msr
+
+item Ar40F
+field Ar40F
+wait 2
+center Ar40F 1E-3
+center Ar40F 1E-3
+   failure display     Ar40F not    centered
+gate = 4
+peak Ar40F
+field Ar40F +0.2 mass
+wait 1.
+zero Ar40F  +0.2 mass
+print Ar40F
+
+item Ar36C
+field Ar36C
+wait 2
+center Ar36C 1E2
+center Ar36C 1E2 
+   failure display     Ar36C not    centered
+gate Ar36C 1E6 5
+peak Ar36C
+field Ar36C +0.2 mass
+wait 1.
+zero Ar36C +0.2 mass
+print Ar36C
+multiplier off
+
+item Ar40C
+field Ar40C
+wait 2.
+center Ar40C 1E2
+center Ar40C 1E2
+   failure display     Ar40C not    centered
+gate Ar40C 1E5 5.
+peak Ar40C
+field Ar40C +0.2 mass
+wait 1.
+zero Ar40C +0.2 mass
+multiplier off
+
+item CO44C
+field CO44C
+wait = 2.
+gate = 0.1
+collector F
+   checked =  false
+   balance CO44C -0.1 +0.1 mass 15
+center CO44C 5E2
+center CO44C 5E2
+gate CO44C 1E4 5.
+peak CO44C
+field CO44C +0.1 mass
+wait 1.
+zero CO44C +0.1 mass
+print CO44C
+multiplier off
+
+until 6, 4 done
+
+event pumpout
+
+write regression HO18C
+write regression Ne20C
+write regression Ne22C
+write regression Ar40F
+write regression Ar36C
+write regression Ar40C
+write regression CO44C
+
+write standard Ne 20 1.0189E-8
+write standard Ne 22 2.9515E-10
+write standard Ar 36 5.0608E-10
+write standard Ar 40 1.5110E-7
+write standard CO 44 1.E-8
+
+digest
+display OP S2
+wait 0:30
+timer go
+close
+

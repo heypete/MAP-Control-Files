@@ -1,0 +1,8 @@
+repeat
+field Kr84F -5 mass
+wait 3.
+field Kr84F +5 mass
+wait 3.
+until 3
+field Kr84F
+close

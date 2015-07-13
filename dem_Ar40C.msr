@@ -1,0 +1,8 @@
+repeat
+field Ar40C -5 mass
+wait 3.
+field Ar40C +5 mass
+wait 3.
+until 3
+field Ar40C
+close

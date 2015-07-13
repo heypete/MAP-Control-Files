@@ -1,0 +1,18 @@
+{Wake-up system}
+{28.01.2015}
+
+{--------------------------}
+
+display AIR VALVE open?
+wait 0:20
+display close SV
+wait 0:30
+display open ST
+wait 0:30
+display close 1
+wait 0:30
+display close 17
+wait 0:30
+display open ET
+wait 0:30
+close

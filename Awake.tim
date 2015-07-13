@@ -1,0 +1,11 @@
+display   close valves   1,17
+wait 0:30
+display check pressures
+wait 0:10
+display open Turbo ET
+wait 0:30
+display close Ionpump SV
+wait 0:30
+display  open MAP TURBO
+wait 0:30
+display check tanks

@@ -1,0 +1,12 @@
+mul off
+item H2F
+try =  true
+field H2F +2.0 mass
+wait 3.
+field H2F -2.0 mass
+wait 3.
+field H2F +2.0 mass
+wait 3.
+field H2F -2.0 mass
+wait 3.
+close

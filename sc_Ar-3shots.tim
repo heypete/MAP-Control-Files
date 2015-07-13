@@ -1,0 +1,137 @@
+
+{ Slow calibaration C_Ar_Oven in MAP}
+{ 29.08.2012}
+{--------------------------}
+
+display Magnet_Setup  is running
+measure run magnet_setup.msr
+
+at 0:02
+valve close all
+at 1:00
+display    Ln2 to coal   12
+wait 5:00
+display    refill Ln2   12
+wait 5:00
+display    close valve  11
+wait 0:15
+display    close valves   S4,S8,13,15
+wait 0:45
+valve open 110
+
+
+wait 0:30
+valve open 6
+wait 0:30
+valve close 6
+display Check Valve
+wait 0:30
+valve open 7
+wait 0:20
+valve close 7
+display Check Valve
+wait 0:15
+
+header type C
+header bottle 9
+header dilution .9994943
+header  cal +1
+
+
+display    refill Ln2    12
+wait 5:00
+display    refill Ln2    12
+wait 5:00
+display    refill Ln2    12
+
+wait 0:30
+valve open 6
+wait 0:30
+valve close 6
+display Check Valve
+wait 0:30
+valve open 7
+wait 0:20
+valve close 7
+display Check Valve
+wait 0:15
+
+header type C
+header bottle 9
+header dilution .9994943
+header  cal +1
+
+display    refill Ln2    12
+wait 5:00
+display    refill Ln2    12
+wait 5:00
+display    refill Ln2    12
+
+wait 0:30
+valve open 6
+wait 0:30
+valve close 6
+display Check Valve
+wait 0:30
+valve open 7
+wait 0:20
+valve close 7
+display Check Valve
+wait 0:15
+
+header type C
+header bottle 9
+header dilution .9994943
+header  cal +1
+
+display    refill Ln2    12
+wait 5:00
+display    refill Ln2    12
+wait 5:00
+display    refill Ln2    12
+wait 5:00
+display    refill Ln2    12
+wait 5:00
+display    refill Ln2    12
+wait 2:00
+display    close valve   12
+wait 0:15
+valve close 110
+wait 0:05
+display    open valves  S4,S8,13,15
+wait 1:00
+display    Hot H2O to   coal12
+wait 2:00 
+display    coal12 to    180°C
+wait 0:15
+wait 15:00
+display    Close 13,15  open 12 
+wait 1:00
+
+display Magnet_Setup  is running
+measure run magnet_setup.msr
+
+output extension AR
+header type C
+wait 0:02
+
+display   CL S4,S7,S8
+wait 1:00
+valve open 110
+wait 0:05
+display CL S2
+wait 0:30
+display OP S1
+wait 0:02
+event inlet
+
+measure run sc_Ar.msr
+timer halt
+
+display Close S1
+wait 0:15
+valve close 110
+display  OP S8, S4, S7
+wait 1:00
+display  OP 11, 13, 15
+

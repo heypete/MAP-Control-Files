@@ -1,0 +1,546 @@
+{He-Ne FastCal in MAP 215-50}
+{Faraday: He3F, He4F, Ne20F, Ne22F}
+{Counter: He3C, Ne20C, Ne21C, Ne22C}
+{Version: 27.11.2009 by Ingo}
+{-------------}
+
+program
+event inlet
+frame
+
+multiplier off
+
+collector F
+low F 1E-5
+
+collector F
+high C 1E6
+
+collector C
+high C 1E6
+
+{define background items}
+{-----------------------}
+
+item H2C:
+try = true
+gate = 1
+wait = 3
+
+item H2F:
+try = true
+gate = 1
+wait = 3
+
+item HDC:
+try = true
+gate = 1
+wait = 3
+
+item CH16C:
+try = true
+gate = 1
+wait = 3
+
+item HO18C:
+try = true
+gate = 1
+wait = 3
+
+item F19C:
+try = true
+gate = 1
+wait = 3
+
+item Ar40C:
+try = true
+gate = 1
+wait = 3
+
+item CO44C:
+try = true
+gate = 1
+wait = 3
+
+{define noble gas items}
+{----------------------}
+
+item He3F:
+try = true
+gate = 8
+wait = 3
+
+item He3c:
+try = true
+gate = 8
+wait = 3
+
+item He4F
+try = true
+gate = 1
+wait = 3
+
+item Ne20C:
+try = true
+gate = 1
+wait = 3
+
+item Ne20F:
+try = true
+gate = 1
+wait = 3
+
+item Ne21C:
+try = true
+gate = 5
+wait = 3
+
+item Ne22C:
+try = true
+gate = 2
+wait = 3
+
+item Ne22F:
+try = true
+gate = 2
+wait = 3
+
+{background balance and center during gas inlet}
+{----------------------------------------------}
+multiplier off
+field H2F
+wait = 2.
+gate = 0.1
+collector C
+   checked = false
+   balance H2F -0.05 +0.05 mass 4
+measure halt
+center H2F 1E3
+center H2F 1E3
+item H2F
+gate = 3.
+peak H2F
+multiplier off
+
+item CH16C
+field CH16C
+wait = 4.
+gate = 0.1
+collector F
+   checked = false
+   balance CH16C -0.1 +0.1 mass 10
+measure halt
+center CH16C 5E2
+Center CH16C 5E2
+multiplier off
+
+item HO18C
+field HO18C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false  
+   balance HO18C -0.3 +0.3 mass 10
+measure halt
+center HO18C 2E2
+center HO18C 2E2
+multiplier off
+
+item F19C
+field F19C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance F19C -0.1 +0.1 mass 5
+measure halt
+center F19C 1E2
+center F19C 1E2
+gate = 5.
+peak F19C
+multiplier off
+
+item Ar40C
+field Ar40C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance Ar40C -0.3 +0.3 mass 10
+measure halt
+center Ar40C 2E2
+center Ar40C 2E2
+multiplier off
+
+item CO44C
+field CO44C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance CO44C -0.2 +0.2 mass 10
+measure halt
+center CO44C 2E2
+center CO44C 2E2
+multiplier off
+
+display  ready for ES?  then CL S5
+measure halt
+wait 0:05
+
+timer go
+
+{First serious step, center and balance all noble gas isotopes}
+{---------------------------------------------------}
+
+call dem_H2C.msr
+
+multiplier off
+field H2F
+wait = 2.
+gate = 0.1
+collector C
+   checked = false
+balance H2F -0.05 +0.05 mass 4
+measure halt
+center H2F 1E3
+center H2F 1E3
+item H2F
+gate = 3.
+peak H2F
+multiplier off
+
+item He3F
+field He3F
+wait = 2.
+gate = 0.1
+collector C
+   checked = false
+   balance He3F -0.05 +0.05 mass 10
+measure halt
+center He3F 1E-3
+center He3F 1E-3
+gate = 3
+peak He3F
+zero He3F +0.1 mass
+print
+
+calc He3C H2F CO44C
+item He3C
+field He3C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance He3C -0.05 +0.05 mass 6
+measure halt
+center He3C 1E2
+center He3C 1E2
+gate He3C 1E5 5
+peak He3C
+zero He3C +0.1 mass
+print
+multiplier off
+
+item He4F
+field He4F
+wait = 2.
+gate = 0.1
+collector C
+   checked = false
+   balance He4F -0.05 +0.05 mass 10
+measure halt
+center He4F 1E-2
+center He4F 1E-2
+gate = 3.
+peak He4F
+zero He4F +0.1 mass
+print
+
+item HO18C
+field HO18C
+wait = 4.
+gate = 0.1
+collector F
+   checked = false  
+   balance HO18C -0.15 +0.15 mass 10
+center HO18C 2E2  
+center HO18C 2E2
+gate HO18C 1E4 5
+peak HO18C
+zero HO18C +0.1 mass
+print
+multiplier off
+
+item Ne20F
+field Ne20F
+wait = 2.
+gate = 0.1
+collector C
+   checked = false
+   balance Ne20F -0.1 +0.1 mass 20
+center Ne20F 1E-2
+center Ne20F 1E-2
+gate = 3.
+peak Ne20F
+zero Ne20F +0.1 mass
+print
+
+item Ne22F
+field Ne22F
+wait = 2.
+gate = 0.1
+collector C
+   checked = false
+   balance Ne22F -0.1 +0.1 mass 20
+center Ne22F 1E-2
+center Ne22F 1E-2
+gate = 3.
+peak Ne22F
+zero Ne22F +0.1 mass
+print
+
+item Ne20C
+field Ne20C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance Ne20C -0.1 +0.1 mass 15
+center Ne20C 1E2
+center Ne20C 1E2
+gate Ne20C 1E5 5
+peak Ne20C
+zero Ne20C +0.1 mass
+print
+multiplier off
+
+item Ne21C
+field Ne21C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance Ne21C -0.1 +0.1 mass 10
+center Ne21C 1E2
+center Ne21C 1E2
+gate Ne21C 1E4 10
+peak Ne21C
+zero Ne21C +0.1 mass
+multiplier off
+
+item Ne22C
+field Ne22C
+wait = 2.
+gate = 0.1
+collector F
+   checked =  false
+   balance Ne22C -0.1 +0.1 mass 15
+center Ne22C 1E2
+center Ne22C 1E2
+gate Ne22C 1E5 5
+peak Ne22C
+zero Ne22C +0.1 mass
+multiplier off
+
+item Ar40C
+field Ar40C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance Ar40C -0.15 +0.15 mass 15
+center Ar40C 2E2
+center Ar40C 2E2
+gate Ar40C 1E4 5
+peak Ar40C
+zero Ar40C +0.2 mass
+multiplier off
+
+item CO44C
+field CO44C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance CO44C -0.15 +0.15 mass 15
+center CO44C 2E2
+center CO44C 2E2
+gate CO44C 1E4 5
+peak CO44C
+zero CO44C +0.2 mass
+multiplier off
+
+{8 cycles, read isotopes, no balancing, no centering}
+{---------------------------------------------------}
+
+repeat
+
+run dem_H2C.msr
+halt
+
+field H2F
+wait = 2.
+gate = 0.1
+center H2F 1E3
+center H2F 1E3
+item H2F
+gate = 3.
+peak H2F
+multiplier off
+
+
+item He3F
+field He3F
+wait = 2.
+gate = 0.1
+collector C
+   checked = false
+   balance He3F -0.05 +0.05 mass 10
+center He3F 1E-3
+center He3F 1E-3
+gate = 3
+peak He3F
+zero He3F +0.1 mass
+print
+
+item He3C
+field He3C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   gate = 0.1
+   balance He3c -0.05 +0.05 mass 10
+center He3C 1E2
+center He3C 1E2
+gate He3C 1E5 5.
+peak He3C
+zero He3C +0.1 mass
+print
+multiplier off
+
+item He4F
+field He4F
+wait = 2.
+center He4F 1E-2
+center He4F 1E-2
+gate = 3.
+peak He4F
+zero He4F +0.1 mass
+print
+
+item HO18C
+field HO18C
+wait = 4.
+center HO18C 2E2  
+center HO18C 2E2
+gate HO18C 1E4 5
+peak HO18C
+zero HO18C +0.1 mass
+print
+multiplier off
+
+item Ne20F
+field Ne20F
+wait = 2.
+center Ne20F 1E-2
+center Ne20F 1E-2
+gate = 3.
+peak Ne20F
+zero Ne20F +0.1 mass
+print
+
+item Ne22F
+field Ne22F
+wait = 2.
+center Ne22F 1E-2
+center Ne22F 1E-2
+gate = 3.
+peak Ne22F
+zero Ne22F +0.1 mass
+print
+
+item Ne20C
+field Ne20C
+wait = 2.
+center Ne20C 1E2
+center Ne20C 1E2
+gate Ne20C 1E5 5
+peak Ne20C
+zero Ne20C +0.1 mass
+multiplier off
+
+item Ne21C
+field Ne21C
+wait = 2.
+center Ne21C 1E2
+center Ne21C 1E2
+gate Ne21C 1E4 10.
+peak Ne21C
+zero Ne21C +0.1 mass
+multiplier off
+
+item Ne22C
+field Ne22C
+wait = 2.
+center Ne22C 1E2
+center Ne22C 1E2
+gate Ne22C 1E5 5.
+peak Ne22C
+zero Ne22C +0.1 mass
+multiplier off
+
+item Ar40C
+field Ar40C
+wait = 2.
+center Ar40C 2E2
+center Ar40C 2E2
+gate Ar40C 1E4 5
+peak Ar40C
+zero Ar40C +0.2 mass
+multiplier off
+
+item CO44C
+field CO44C
+wait = 2.
+center CO44C 2E2
+center CO44C 2E2
+gate CO44C 1E4 5
+peak CO44C
+zero CO44C 0.2 mass
+multiplier off
+
+until 6
+
+event pumpout
+
+write regression H2C
+write regression He3C
+write regression He3F
+write regression He4F
+write regression HO18C
+write regression Ne20C
+write regression Ne20F
+write regression Ne21C
+write regression Ne22C
+write regression Ne22F
+write regression Ar40C
+write regression CO44C
+
+
+write standard He 3 1.6587E-9
+write standard He 4 1.2549E-7
+write standard Ne 20 2.8747E-9
+write standard Ne 21 8.5202E-12
+write standard Ne 22 2.9515E-10
+Write standard Ar 40 1.E-8
+write standard CO 44 1.E-8
+
+digest
+display OP S2    
+wait 0:15
+event pumpout
+timer go
+
+close

@@ -1,0 +1,63 @@
+{ Fast-Cal Kr and Xe in MAP}
+{ Plus Residual - PS }
+{ 02.05.2012 }
+{--------------------------}
+display Magnet_Setup  is running
+measure run magnet_setup.msr
+timer halt
+wait 0:02
+valve close all
+output extension KX
+wait 0:10
+display    CL S4,S8     S10,S11 CL?
+wait 0:30
+
+{FastCal KrXe in MAP, bottle 8}
+wait 0:15
+{PS: updated to show torque on bottle}
+display    open back    1.5 NM
+wait 0:40
+display    close back   1.5 NM
+wait 0:40
+display    open front   1.6 NM
+wait 0:40
+display   close front   1.6 NM
+wait 0:40
+display Valves OK?
+wait 0:15
+
+header type F
+header bottle 8
+header dilution .9994943
+header cal +1
+
+wait 0:15
+display CL S2
+wait 0:30
+display OP S1
+event inlet
+wait 0:02
+
+measure run fc_kx.msr
+
+wait 3:00
+timer halt
+wait 0:10
+
+display OP S4, S8
+wait 0:20
+display      WAIT TILL   END OF FC
+timer halt
+
+{Residual in MAP}
+{---------------}
+{PS: updated to remove reference to N2 on COAL4}
+header type R
+wait 5:00
+display CL S2
+event inlet
+wait 0:10
+
+measure run r_kx.msr
+wait 0:30
+timer halt

@@ -1,0 +1,294 @@
+{Ar Residual in MAP 215-50}
+{Counter Ar36C, Ar38C, Ar40C}
+{+Background CL35C, CL37C, CO44C} 
+{Version: 06.05.2009 by Ingo}
+{----------------------}
+
+program
+event inlet
+frame
+
+multiplier off
+
+collector F
+low F 1E-5
+
+collector F
+high C 1E6
+
+collector C
+high C 1E6
+
+{Define items}
+{------------}
+
+item H2C:
+try = true
+gate = 1
+wait = 5
+
+item H2F:
+try = true
+gate = 1
+wait = 5
+
+item HO18C:
+try = true
+gate = 1
+wait = 5
+
+item F19C:
+try = true
+gate = 1
+wait = 5
+
+item Cl35C:
+try = true
+gate = 1
+wait = 2
+
+item Cl37C:
+try = true
+gate = 1
+wait = 2
+
+item Ar36C:
+try =  true
+gate = 1
+wait = 3
+
+item Ar38C:
+try =  true
+gate = 1
+wait = 3
+
+item Ar40C:
+try = true
+gate = 1
+wait = 3
+
+item Ar36F:
+try = true
+gate = 1
+wait = 2
+
+item Ar38F:
+try = true
+gate = 1
+wait = 2
+
+item Ar40F:
+try = true
+gate = 1
+wait = 2
+
+item CO44C:
+try =  true
+gate = 1
+wait = 2
+
+item Kr84C:
+try =  true
+gate = 1
+wait = 3
+
+item Xe132C
+try = true
+gate = 1
+wait = 3
+
+
+
+{scan and center Cl35, Cl37}
+{--------------------------}
+
+call dem_Ar36C.msr
+
+field Cl35C
+wait 2
+gate = 0.1
+collector F
+   checked = false
+   balance Cl35C -0.4 +0.4 mass 10
+field Cl35C
+wait 2
+gate = 2
+peak Cl35C
+field CL35C +0.2 mass
+wait 2.
+zero Cl35C +0.2 mass
+multiplier off
+
+field Cl37C
+wait 2
+gate = 0.1
+collector F
+   checked = false
+   balance Cl37C -0.4 +0.4 mass 10
+field Cl37C
+wait 2
+gate = 2.
+peak CL37C
+field CL37C +0.2 mass
+wait 2.
+zero Cl37C +0.1 mass
+multiplier off
+
+field CO44C
+wait 2
+gate = 0.1
+collector F
+   checked = false
+   balance CO44C -0.2 +0.2 mass 10
+field CO44C
+wait 2.
+gate = 2.
+peak CO44C
+field CO44C +0.2 mass
+wait 2.
+zero CO44C +0.2 mass
+multiplier off
+
+at 3:00 event separation
+
+timer go
+
+{first serious step, balance and center Ar, Kr, Xe isotopes}
+{----------------------------------------------------------}
+
+call dem_Ar36C.msr
+
+calc Ar36C Cl35C
+field Ar36C
+wait 2
+gate = 0.1
+collector F
+  checked = false
+  balance Ar36c -0.2 +0.2 mass 10
+center Ar36C 1E2
+center Ar36c 1E2
+field Ar36C
+wait 2
+gate = 6
+peak Ar36C
+field Ar36C +0.15 mass
+wait 2
+zero Ar36C +0.15 mass
+multiplier off
+
+calc Ar38C Cl37C
+field Ar38C
+wait 2
+gate = 0.1
+collector F
+  checked = false
+  balance Ar38C -0.3 +0.3 mass 10
+center Ar38C 1E2
+center Ar38C 1E2 
+field Ar38C
+wait 2
+gate = 8
+peak Ar38C
+field Ar38C +0.15 mass
+wait 2
+zero Ar38C +0.15 mass
+multiplier off
+
+field Ar40C
+wait 2
+gate = 0.1
+collector F
+  checked = false
+  balance Ar40C -0.3 +0.3 mass 10
+center Ar40C 1E2
+center Ar40C 1E2 
+field Ar40C
+wait 2
+gate = 8
+peak Ar40C
+field Ar40C +0.1 mass
+wait 2
+zero Ar40C +0.1 mass
+multiplier off
+
+
+{5 cycles}
+{--------}
+
+repeat
+
+call dem_Ar36C.msr
+
+field Ar36C
+wait 2
+gate = 0.1
+collector F
+  checked = false
+  balance Ar36c -0.2 +0.2 mass 10
+center Ar36C 1E2
+center Ar36c 1E2
+field Ar36C
+wait 2
+gate = 6
+peak Ar36C
+field Ar36C +0.15 mass
+wait 2
+zero Ar36C +0.15 mass
+multiplier off
+
+field Ar38C
+wait 2
+gate = 0.1
+collector F
+  checked = false
+  balance Ar38C -0.2 +0.2 mass 10
+center Ar38C 1E2
+center Ar38C 1E2 
+field Ar38C
+wait 2
+gate = 8
+peak Ar38C
+field Ar38C +0.15 mass
+wait 2
+zero Ar38C +0.15 mass
+multiplier off
+
+field Ar40C
+wait 2
+gate = 0.1
+collector F
+  checked = false
+  balance Ar40C -0.2 +0.2 mass 10
+center Ar40C 1E2
+center Ar40C 1E2 
+field Ar40C
+wait 2
+gate = 8
+peak Ar40C
+field Ar40C +0.2 mass
+wait 2
+zero Ar40C +0.2 mass
+multiplier off
+
+until 5
+
+event pumpout
+
+write regression Ar36C
+write regression Ar38C
+write regression Ar40C
+
+write regression Ar40C/Ar36C local
+write regression Ar36C/Ar38C local
+
+write standard Ar 36 4.9070E-10
+write standard Ar 38 9.2520E-11
+write standard Ar 40 1.4651E-7
+write standard CO 44 1.E-8
+
+display meas end? op S2, S4
+wait 0:15
+display Press TG
+
+digest
+close

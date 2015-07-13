@@ -1,0 +1,98 @@
+program
+
+frame
+
+multiplier off
+
+collector F
+low F 1E-3
+
+collector F
+high C 1E6
+
+collector C
+high C 1E6
+
+item H2C:
+try = true
+gate = 1
+wait = 2
+
+item H2F:
+try = true
+gate = 1
+wait = 2
+
+item Ar40F:
+try = true
+gate = 1
+wait = 2
+
+call dem_H2C.msr
+field H2C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance H2C -0.01 +0.01 mass 4
+center H2C 1E4
+center H2C 1E4
+gate H2C 1E5 2.
+measure halt
+peak H2C
+print H2C
+field H2C +0.1 mass
+wait 1.
+zero H2C +0.1 mass
+multiplier off
+
+field H2F
+wait = 2.
+gate = 0.1
+collector C
+   checked = false
+   balance H2F -0.05 +0.05 mass 4
+center H2F 1E-3
+center H2F 1E-3
+gate = 2.
+measure halt
+peak H2F
+print H2F
+field H2F +0.1 mass
+wait 1.
+zero H2F +0.1 mass
+multiplier off
+
+call dem_Ar36C.msr
+
+field Ar40C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance Ar40C -0.5 +0.3 mass 8
+center Ar40C 1E2
+center Ar40C 1E2
+gate Ar40C 1E4 5.
+measure halt
+peak Ar40C
+print Ar40C
+field Ar40C +0.1 mass
+wait 1.
+zero Ar40C 0.1 mass
+multiplier off
+
+field Ar40F
+wait 2
+gate = 0.1
+collector C
+  checked = false
+  balance Ar40F -0.2 +0.2 mass 15
+center Ar40F 1E-2 
+center Ar40F 1E-2
+gate = 4
+peak Ar40F
+field Ar40F +0.2 mass
+wait 1.
+zero Ar40F  +0.2 mass
+print Ar40F

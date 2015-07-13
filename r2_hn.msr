@@ -1,0 +1,325 @@
+{He-Ne}
+{Residual in MAP 215-50}
+{Version 16.10.2009 by Ingo}
+{--------------------------}
+
+program
+event inlet
+frame
+
+multiplier off
+
+collector F
+low F 1E-5
+
+collector F
+high C 1E6
+
+collector C
+high C 1E6
+
+{define background items}
+{-----------------------}
+
+item H2C:
+try = true
+gate = 1
+wait = 2
+
+item H2F:
+try = true
+gate = 1
+wait = 2
+
+item HDC:
+try = true
+gate = 1
+wait = 2
+
+item CH16C:
+try = true
+gate = 1
+wait = 2
+
+item HO18C:
+try = true
+gate = 1
+wait = 2
+
+item F19C:
+try = true
+gate = 1
+wait = 2
+
+item Ar40C:
+try = true
+gate = 1
+wait = 2
+
+item CO44C:
+try = true
+gate = 1
+wait = 2
+
+{define noble gas items}
+{----------------------}
+
+item He3c:
+try = true
+gate = 8
+wait = 2
+
+item He4C:
+try = true
+gate = 1
+wait = 2
+
+item Ne20C:
+try = true
+gate = 1
+wait = 2
+
+item Ne21C:
+try = true
+gate = 5
+wait = 2
+
+item Ne22C:
+try = true
+gate = 2
+wait = 2
+
+
+{background balance and center during gas inlet}
+{----------------------------------------------}
+
+field H2F
+wait = 2.
+gate = 0.1
+collector C
+   checked = false
+   balance H2F -0.05 +0.05 mass 4
+measure halt
+center H2F 1E3
+center H2F 1E3
+item H2F
+gate = 3.
+peak H2F
+multiplier off
+
+field CH16C
+wait = 2.
+gate = 0.1
+   collector F
+   checked = false
+   balance CH16C -0.1 +0.1 mass 6
+center CH16C 5E2
+center CH16C 5E2
+item CH16C
+gate = 3.
+peak CH16C
+multiplier off
+
+field HO18C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false  
+   balance HO18C -0.2 +0.21 mass 6
+center HO18C 2E2
+center HO18C 2E2
+item HO18C
+gate = 2.
+peak HO18C
+multiplier off
+
+field F19C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance F19C -0.2 +0.2 mass 6
+center F19C 5E2
+center F19C 5E2
+item F19C
+gate = 5.
+peak F19C
+multiplier off
+
+field Ar40C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance Ar40C -0.5 +0.3 mass 8
+center Ar40C 1E2
+center Ar40C 1E2
+item Ar40C
+gate = 5.
+peak Ar40C
+multiplier off
+
+field CO44C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance CO44C -0.2 +0.2 mass 8
+center CO44C 2E2
+center CO44C 2E2
+item CO44C
+gate = 5.
+peak CO44C
+multiplier off
+
+display ready for event separation? 3min
+display refill N2
+wait 0:10
+
+event separation
+
+{1x center and balance all noble gas isotopes}
+{-----------------------------------------------------}
+
+repeat
+
+call dem_H2C.msr
+
+field H2F
+wait = 2.
+center H2F 1E3
+center H2F 1E3
+item H2F
+gate = 3.
+peak H2F
+multiplier off
+
+
+
+field He3C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance He3C -0.025 +0.025 mass 6
+center He3C 1E2
+center He3C 1E2
+gate He3C 1E5 5
+peak He3C
+zero He3C +0.1 mass
+print
+
+field He4C
+wait = 3.
+gate = 0.1
+collector F
+   checked = false
+   balance He4C -0.05 +0.05 mass 4
+center He4C 5E2
+center He4C 5E2
+gate He4C 1E4 5.
+peak He4C
+zero He4C +0.1 mass
+multiplier off
+
+
+field HO18C
+wait = 3.
+center HO18C 1E3
+center HO18C 1E3
+gate HO18C 1E5 5.
+peak HO18C
+zero HO18C +0.1 mass
+multiplier off
+
+field Ne20C
+wait = 3.
+gate = 0.1
+collector F
+   checked = false
+   balance Ne20C -0.15 +0.15 mass 10
+center Ne20c 1E3
+center Ne20C 1E3
+gate Ne20C 1E4 5.
+peak Ne20C
+zero Ne20C +0.1 mass
+multiplier off
+
+
+
+field Ne21C
+wait = 2.
+gate = 0.1
+collector F
+   checked = false
+   balance Ne21C -0.1 +0.1 mass 10
+center Ne21C 1E2
+center Ne21C 1E2
+gate Ne21C 1E4 10
+peak Ne21C
+zero Ne21C +0.1 mass
+multiplier off
+
+item Ne22C
+field Ne22C
+wait = 2.
+gate = 0.1
+collector F
+   checked =  false
+   balance Ne22C -0.1 +0.1 mass 15
+center Ne22C 1E2
+center Ne22C 1E2
+gate Ne22C 1E5 5
+peak Ne22C
+zero Ne22C +0.1 mass
+multiplier off
+
+
+
+field Ar40C
+wait = 3.
+peak Ar40C
+zero Ar40C +0.1 mass
+multiplier off
+
+field CO44C
+wait = 2.
+peak CO44C
+zero CO44C +0.1 mass
+multiplier off
+
+until 5
+
+
+event pumpout
+
+write regression H2C
+write regression He3C
+write regression He4C
+write regression HO18C
+write regression Ne20C
+write regression Ne21C
+write regression Ne22C
+write regression Ar40C
+write regression CO44C
+
+write regression He3C/He4C local
+write regression Ne20C/Ne22C local
+write regression Ne21C/Ne22C local
+write regression Ne20C/Ne21C local
+
+write standard He 3 1.6587E-9
+write standard He 4 1.2549E-7
+write standard Ne 20 2.8747E-9
+write standard Ne 21 8.5202E-12
+write standard Ne 22 2.9515E-10
+Write standard Ar 40 1.E-8
+write standard CO 44 1.E-8
+
+call Magnet_nacht.msr
+
+digest
+
+timer go
+
+close

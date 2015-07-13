@@ -1,0 +1,334 @@
+{Ar SlowCalin MAP 215-50}
+{Faraday: Ar36F, Ar38F, Ar40F}
+{Counter Ar36C, Ar38C}
+{+Background CL35C, CL37C, CO44C} 
+{Version: 17.08.2012 by Ingo}
+{----------------------}
+
+program
+
+frame
+
+multiplier off
+
+collector F
+low F 5E-4
+
+collector F
+high C 1E6
+
+collector C
+high C 1E6
+
+{Define items}
+{------------}
+
+item H2C:
+try = true
+gate = 1
+wait = 5
+
+item H2F:
+try = true
+gate = 1
+wait = 5
+
+item HO18C:
+try = true
+gate = 1
+wait = 5
+
+item F19C:
+try = true
+gate = 1
+wait = 5
+
+item Cl35C:
+try = true
+gate = 1
+wait = 3
+
+item Cl37C:
+try = true
+gate = 1
+wait = 3
+
+item Ar36C:
+try =  true
+gate = 1
+wait = 3
+
+item Ar38C:
+try =  true
+gate = 1
+wait = 3
+
+item Ar40C:
+try = true
+gate = 1
+wait = 3
+
+item Ar36F:
+try = true
+gate = 1
+wait = 3
+
+item Ar38F:
+try = true
+gate = 1
+wait = 3
+
+item Ar40F:
+try = true
+gate = 1
+wait = 3
+
+item CO44C:
+try =  true
+gate = 1
+wait = 3
+
+item Kr84C:
+try =  true
+gate = 1
+wait = 3
+
+item Xe132C
+try = true
+gate = 1
+wait = 3
+
+{scan and center Cl35, Cl37}
+{--------------------------}
+
+call dem_Ar36C.msr
+
+field Cl35C
+wait 2
+gate = 0.1
+collector F
+   checked = false
+   balance Cl35C -0.4 +0.4 mass 10
+gate Cl35C 1E4 2.
+peak Cl35C
+print Cl35C
+field CL35C +0.2 mass
+wait 1.
+zero Cl35C +0.2 mass
+multiplier off
+
+field Cl37C
+wait 2
+gate = 0.1
+collector F
+   checked = false
+   balance Cl37C -0.4 +0.4 mass 10
+gate Cl37C 1E4 2.
+peak CL37C
+print Cl37C
+field CL37C +0.2 mass
+wait 1.
+zero Cl37C +0.2 mass
+multiplier off
+
+field CO44C
+wait 2
+gate = 0.1
+collector F
+   checked = false
+   balance CO44C -0.2 +0.2 mass 10
+gate CO44C 1E4 5.
+peak CO44C
+print CO44C
+field CO44C +0.2 mass
+wait 1.
+zero CO44C +0.2 mass
+multiplier off
+
+display ready for event separation? 3min
+at 3:00
+event separation
+timer go
+
+
+{first serious step, balance and center Ar, Kr, Xe isotopes}
+{----------------------------------------------------------}
+
+call dem_Ar36C.msr
+calc ar36f ar38f
+field Ar36F
+wait 2
+gate = 0.1
+collector C
+   checked = false
+   balance Ar36F -0.3 +0.3 mass 15
+center Ar36F 1.3E-3
+center Ar36F 1.3E-3
+gate = 4
+peak Ar36F
+field Ar36F +0.2 mass
+wait 1.
+zero Ar36F +0.2 mass
+print Ar36F
+
+field Ar38F
+wait 2
+gate = 0.1
+collector C
+   checked = false
+   balance Ar38F -0.3 +0.3 mass 15
+center Ar38F 1.3E-3
+center Ar38F 1.3E-3
+gate = 4
+peak Ar38F
+field Ar38F +0.2 mass
+wait 1.
+zero Ar38F +0.2 mass
+print Ar38F
+
+field Ar40F
+wait 2
+gate = 0.1
+collector C
+  checked = false
+  balance Ar40F -0.2 +0.2 mass 15
+center Ar40F 1E-2 
+center Ar40F 1E-2
+gate = 4
+peak Ar40F
+field Ar40F +0.2 mass
+wait 1.
+zero Ar40F  +0.2 mass
+print Ar40F
+
+field Ar36C
+wait 2
+gate = 0.1
+collector F
+  checked = false
+  balance Ar36C -0.3 +0.3 mass 10
+center Ar36C 1E3
+center Ar36C 1E3 
+gate Ar36C 1E6 5
+peak Ar36C
+field Ar36C +0.2 mass
+wait 1.
+zero Ar36C +0.2 mass
+print Ar36C
+multiplier off
+
+field Ar38C
+wait 2
+gate = 0.1
+collector F
+  checked = false
+  balance Ar38C -0.3 +0.3 mass 10
+center Ar38C 1E3
+center Ar38C 1E3 
+gate Ar38C 1E6 5
+peak Ar38C
+field Ar38C +0.2 mass
+wait 1.
+zero Ar38C +0.2 mass
+print Ar38C
+multiplier off
+
+
+{6 cycles}
+{--------}
+
+repeat
+
+call dem_Ar36C.msr
+
+field Ar36F
+wait 2
+center Ar36F 1.3E-3
+center Ar36F 1.3E-3
+   failure display     Ar36F not    centered
+gate = 4
+peak Ar36F
+field Ar36F +0.2 mass
+wait 1.
+zero Ar36F +0.2 mass
+print Ar36F
+
+field Ar38F
+wait 2
+gate = 0.1
+center Ar38F 1.3E-3
+center Ar38F 1.3E-3
+   failure display     Ar38F not    centered
+gate = 4
+peak Ar38F
+field Ar38F +0.2 mass
+wait 1.
+zero Ar38F +0.2 mass
+print Ar38F
+
+field Ar40F
+wait 2
+center Ar40F 1E-2 
+center Ar40F 1E-2
+   failure display     Ar40F not    centered
+gate = 4
+peak Ar40F
+field Ar40F +0.2 mass
+wait 1.
+zero Ar40F  +0.2 mass
+print Ar40F
+
+field Ar36C
+wait 2
+center Ar36C 1E3
+center Ar36C 1E3 
+   failure display     Ar36C not    centered
+gate Ar36C 1E6 5
+peak Ar36C
+field Ar36C +0.2 mass
+wait 1.
+zero Ar36C +0.2 mass
+print Ar36C
+multiplier off
+
+field Ar38C
+wait 2
+center Ar38C 1E3
+center Ar38C 1E3 
+   failure display     Ar38C not    centered
+gate Ar38C 1E6 5
+peak Ar38C
+field Ar38C +0.2 mass
+wait 1.
+zero Ar38C +0.2 mass
+print Ar38C
+multiplier off
+
+
+until 8
+
+event pumpout
+
+write regression Ar40F
+write regression Ar36F
+write regression Ar36C
+write regression Ar38C
+write regression Ar38F
+
+write regression Ar40F/Ar36F local
+write regression Ar36F/Ar38F local
+write regression Ar36C/Ar38C local
+
+write standard Ar 36 5.0608E-10
+write standard Ar 38 9.5421E-11
+write standard Ar 40 1.5110E-7
+write standard CO 44 1.E-8
+
+digest
+display OP S2
+wait 0:30
+call magnet_nacht.msr
+wait 1:00
+timer go
+close
+

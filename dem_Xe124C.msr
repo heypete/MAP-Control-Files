@@ -1,0 +1,8 @@
+repeat
+field Xe124C -5 mass
+wait 3.
+field Xe124C +5 mass
+wait 3.
+until 3
+field Xe124C
+close

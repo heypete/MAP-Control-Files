@@ -1,0 +1,101 @@
+{ Slow calibaration c_HeNe_Oven in MAP}
+{ 29.08.2012}
+{--------------------------}
+
+display Magnet_Setup  is running
+measure run magnet_setup.msr
+
+at 0:02
+valve close all
+at 0:10
+display    Set-up oven  Heat oven   
+at 1:00
+display    Ln2 to coal   12,S4
+
+timer halt
+
+display    close valve    oven turbo
+wait 1:30
+display    open valve 3
+wait 0:15
+display    close valves  2,4,10
+wait 0:45
+display    close valves   S8,13,15
+wait 0:45
+valve open 110
+
+valve open 4
+wait 0:30
+valve close 4
+display Check Valve
+wait 0:30
+valve open 5
+wait 0:30
+valve close 5
+display Check Valve
+wait 0:15
+
+header type C
+header bottle 4
+header dilution .9995708
+header  cal +1
+
+display    refill Ln2    12,S4
+wait 5:00
+display    refill Ln2    12,S4
+
+valve open 4
+wait 0:30
+valve close 4
+display Check Valve
+wait 0:30
+valve open 5
+wait 0:30
+valve close 5
+display Check Valve
+wait 0:15
+
+header type C
+header bottle 4
+header dilution .9995708
+header  cal +1
+
+display    refill Ln2    12,S4
+wait 5:00
+display    refill Ln2    12,S4
+wait 5:00
+display    refill Ln2    12,S4
+wait 5:00
+display    refill Ln2    12,S4
+wait 5:00
+
+
+display wait for oven
+timer halt
+
+header type C
+output extension HN
+wait 0:02
+
+display    close valve   S2
+wait 0:20
+display    open valve    S1
+wait 0:15
+event inlet
+wait 0:02
+
+measure run sc_HeNe.msr
+
+timer halt
+
+display    close valve    S5
+wait 0:15
+valve close 110
+wait 0:02
+display    open valve     S8
+wait 0:15
+display    close valve    3
+wait 0:15
+display    open valve   oven turbo 
+wait 1:30
+display    open valves   2,4,10,13,15

@@ -1,0 +1,425 @@
+{KX Residual for MAP}
+{Version IL+PS, 02.05.2012}
+{with Ar40C}
+{----------------------}
+
+program
+
+frame
+
+multiplier off
+
+collector F
+low F 1E-3
+
+collector F
+high C 1E6
+
+collector C
+high C 1E6
+
+
+{Define items}
+{------------}
+
+item Ar40C:
+try = true
+gate = 1
+wait = 3
+
+item Ar40F:
+try = true
+gate = 1
+wait = 3
+
+item Kr78C:
+try = true
+gate = 12
+wait = 3
+
+item Kr80C:
+try = true
+gate = 8
+wait = 3
+
+item Kr82C:
+try = true
+gate = 8
+wait = 3
+
+item Kr83C:
+try = true
+gate = 8
+wait = 3
+
+item Kr84C:
+try =  true
+gate = 8
+wait = 3
+
+item Kr86C:
+try = true
+gate = 8
+wait = 3
+
+item Xe124C:
+try = true
+gate = 12
+wait = 3
+
+item Xe126C:
+try = true
+gate = 12
+wait 3
+
+item Xe128C:
+try = true
+gate = 8
+wait = 3
+
+item Xe130C:
+try = true
+gate = 8
+wait = 3
+
+item Xe131C:
+try = true
+gate = 8
+wait = 3 
+
+item Xe132C:
+try = true
+gate = 8
+wait = 3
+
+item Xe134C:
+try = true
+gate = 8
+wait = 3
+
+item Xe136C:
+try = true
+gate = 8
+wait = 3
+
+{balance and center main isotopes, no peak measurements}
+{------------------------------------------------------}
+
+call dem_Ar40C.msr
+
+field Ar40C
+wait 3
+gate = 0.1
+   collector F
+   checked = false
+   balance Ar40C -0.1 +0.1 mass 4
+measure halt
+multiplier off
+
+call dem_Kr78C.msr
+
+field Kr82C
+wait 3
+peak Kr82C
+zero Kr82C -0.2 mass
+multiplier off
+
+
+field Kr84C
+wait 3
+peak Kr84C
+zero Kr84C -0.2 mass
+multiplier off
+
+call dem_Xe124C.msr
+
+field Xe129C
+wait 3
+peak Xe129C
+zero Xe129C +0.5 mass
+multiplier off
+
+
+field Xe132C
+wait 3
+peak Xe132C
+zero Xe132C +0.5 mass
+multiplier off
+
+
+display ready for event separation? 3min
+at 4:00
+
+event separation
+
+timer go
+
+{1st cycle balance, center, and read all isotopes}
+{------------------------------------------------}
+
+call dem_Ar40C.msr
+
+field Ar40C
+wait 2.
+gate Ar40C 1E4 5.
+center Ar40C 5E2
+center Ar40C 5E2
+peak Ar40C
+zero Ar40C +0.2 mass
+multiplier off
+
+call dem_Kr78C.msr
+
+field Kr78C
+wait 3.
+peak Kr78C
+zero Kr78C -0.2 mass
+multiplier off
+
+field Kr80C
+wait 3.
+peak Kr80C
+zero Kr80C -0.2 mass
+multiplier off
+
+field Kr82C
+wait 3.
+peak Kr82C
+zero Kr82C -0.2 mass
+multiplier off
+
+field Kr83C
+wait 3.
+peak Kr83C
+zero Kr83C -0.2 mass
+multiplier off
+
+field Kr84C
+wait 3.
+peak Kr84C
+zero Kr84C -0.2 mass
+multiplier off
+
+field Kr86C
+wait 3.
+peak Kr86C
+zero Kr86C -0.2 mass
+multiplier off
+
+call dem_Xe124C.msr
+
+field Xe124C
+wait 3
+peak Xe124C
+zero Xe124C +0.5 mass 
+multiplier off
+
+field Xe126C
+wait 3
+peak Xe126C
+zero Xe126C +0.5 mass 
+multiplier off
+
+field Xe128C
+peak Xe128C
+zero Xe128C +0.5 mass 
+multiplier off
+
+field Xe129C
+wait 3.
+peak Xe129C
+zero Xe129C +0.5 mass
+multiplier off
+
+field Xe130C
+wait 3
+peak Xe130C
+zero Xe130C +0.5 mass 
+multiplier off
+
+field Xe131C
+wait 3
+peak Xe131C
+zero Xe131C +0.5 mass 
+multiplier off
+
+field Xe132C
+wait 3.
+peak Xe132C
+zero Xe132C +0.5 mass
+multiplier off
+
+field Xe134C
+wait 3
+peak Xe134C
+zero Xe134C +0.5 mass 
+multiplier off
+
+field Xe136C
+wait 3
+gate Xe136C 5E4 10
+peak Xe136C
+zero Xe136C +0.5 mass 
+multiplier off
+
+
+{read all isotopes, 9 cycles}
+{---------------------------}
+
+repeat
+
+
+call dem_Ar40C.msr
+
+field Ar40C
+wait 2.
+gate Ar40C 1E4 5.
+center Ar40C 5E2
+center Ar40C 5E2
+peak Ar40C
+zero Ar40C +0.2 mass
+multiplier off
+
+call dem_Kr78C.msr
+
+
+field Kr78C
+wait 3.
+peak Kr78C
+zero Kr78C -0.2 mass
+multiplier off
+
+
+field Kr80C
+wait 3.
+peak Kr80C
+zero Kr80C -0.2 mass
+multiplier off
+
+field Kr82C
+wait 3.
+peak Kr82C
+zero Kr82C -0.2 mass
+multiplier off
+
+
+field Kr83C
+wait 3.
+peak Kr83C
+zero Kr83C -0.2 mass
+multiplier off
+
+field Kr84C
+wait 3.
+peak Kr84C
+zero Kr84C -0.2 mass
+multiplier off
+
+field Kr86C
+wait 3.
+peak Kr86C
+zero Kr86C -0.2 mass
+multiplier off
+
+call dem_Xe124C.msr
+
+field Xe124C
+wait 3
+peak Xe124C
+zero Xe124C +0.5 mass 
+multiplier off
+
+field Xe126C
+wait 3
+peak Xe126C
+zero Xe126C +0.5 mass 
+multiplier off
+
+field Xe128C
+peak Xe128C
+zero Xe128C +0.5 mass 
+multiplier off
+
+field Xe129C
+wait 3.
+peak Xe129C
+zero Xe129C +0.5 mass
+multiplier off
+
+field Xe130C
+wait 3
+peak Xe130C
+zero Xe130C +0.5 mass 
+multiplier off
+
+field Xe131C
+wait 3
+peak Xe131C
+zero Xe131C +0.5 mass 
+multiplier off
+
+field Xe132C
+wait 3.
+peak Xe132C
+zero Xe132C +0.5 mass
+multiplier off
+
+field Xe134C
+wait 3
+peak Xe134C
+zero Xe134C +0.5 mass 
+multiplier off
+
+field Xe136C
+wait 3
+gate Xe136C 5E4 10
+peak Xe136C
+zero Xe136C +0.5 mass 
+multiplier off
+
+until 5
+
+event pumpout
+
+{regression}
+{----------}
+
+output write regression Ar40C
+output write regression Kr78C
+output write regression Kr80C
+output write regression Kr82C
+output write regression Kr83C
+output write regression Kr84C
+output write regression Kr86C
+output write regression Xe124C
+output write regression Xe126C
+output write regression Xe128C
+output write regression Xe129C
+output write regression Xe130C
+output write regression Xe131C
+output write regression Xe132C
+output write regression Xe134C
+output write regression Xe136C
+
+write standard Ar 40 1.0000E-08
+write standard Kr 78 1.7434E-12
+write standard Kr 80 1.1342E-11
+write standard Kr 82 5.7903E-11
+write standard Kr 83 5.7671E-11
+write standard Kr 84 2.8641E-10
+write standard Kr 86 8.7424E-11
+write standard Xe124 4.7470E-13
+write standard Xe126 4.4289E-13
+write standard Xe128 9.5772E-12
+write standard Xe129 1.3195E-10
+write standard Xe130 2.0314E-11
+write standard Xe131 1.0589E-10
+write standard Xe132 1.3421E-10
+write standard Xe134 5.2060E-11
+write standard Xe136 4.4209E-11
+
+call Magnet_nacht.msr
+
+display op S2
+digest
+close

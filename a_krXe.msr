@@ -1,0 +1,707 @@
+{KrXe Blank Version for MAP}
+{Version IL, 14.08.2012}
+{with Ar40C, all on counter no 81Kr}
+{----------------------}
+
+program
+frame
+multiplier off
+
+collector F
+low F 1E-3
+
+collector F
+high C 1E6
+
+collector C
+high C 1E6
+
+
+{Define items}
+{------------}
+
+item Ar40C:
+try = true
+gate = 1
+wait = 3
+
+item Ar40F:
+try = true
+gate = 1
+wait = 3
+
+item Kr78C:
+try = true
+gate = 12
+wait = 3
+
+item Kr80C:
+try = true
+gate = 8
+wait = 3
+
+item Kr82C:
+try = true
+gate = 8
+wait = 3
+
+item Kr83C:
+try = true
+gate = 8
+wait = 3
+
+item Kr84C:
+try =  true
+gate = 8
+wait = 3
+
+item Kr86C:
+try = true
+gate = 8
+wait = 3
+
+item Xe124C:
+try = true
+gate = 12
+wait = 3
+
+item Xe126C:
+try = true
+gate = 12
+wait 3
+
+item Xe128C:
+try = true
+gate = 8
+wait = 3
+
+item Xe130C:
+try = true
+gate = 8
+wait = 3
+
+item Xe131C:
+try = true
+gate = 8
+wait = 3 
+
+item Xe132C:
+try = true
+gate = 8
+wait = 3
+
+item Xe134C:
+try = true
+gate = 8
+wait = 3
+
+item Xe136C:
+try = true
+gate = 8
+wait = 3
+
+{balance and center main isotopes, no peak measurements}
+{------------------------------------------------------}
+
+call dem_Ar40C.msr
+
+field Ar40F
+wait 2
+gate = 0.1
+collector C
+  checked = false
+  balance Ar40F -0.2 +0.2 mass 15
+center Ar40F 1E-2 
+center Ar40F 1E-2
+gate = 4
+peak Ar40F
+field Ar40F +0.2 mass
+wait 1.
+zero Ar40F  +0.2 mass
+print Ar40F
+
+field Ar40C
+wait 3
+gate = 0.1
+   collector F
+   checked = false
+   balance Ar40C -0.1 +0.1 mass 4
+measure halt
+multiplier off
+
+
+
+call dem_Kr78C.msr
+
+field Kr82C
+wait 3
+gate = 0.1
+   collector F
+   checked = false
+   balance Kr82C -0.25 +0.25 mass 4
+measure halt
+multiplier off
+
+field Kr84C
+wait 3
+gate = 0.2
+   collector F
+   checked = false
+   balance Kr84C -0.25 +0.25 mass 4 
+measure halt
+multiplier off
+
+call dem_Xe124C.msr
+
+field Xe129C
+wait 3
+gate = 0.2
+   collector F
+   checked = false
+   balance Xe129C -0.25 +0.25 mass 4
+measure halt
+multiplier off
+
+field Xe132C
+wait 3
+gate = 0.2
+   collector F
+   checked = false
+   balance Xe132C -0.25 +0.25 mass 4
+measure halt
+multiplier off
+
+display ready for event separation? 3min
+
+event separation
+timer go
+
+{1st cycle balance, center, and read all isotopes}
+{------------------------------------------------}
+
+call dem_Ar40C.msr
+
+field Ar40F
+wait 2
+gate = 0.1
+collector C
+  checked = false
+  balance Ar40F -0.2 +0.2 mass 15
+center Ar40F 1E-2 
+center Ar40F 1E-2
+gate = 4
+peak Ar40F
+field Ar40F +0.2 mass
+wait 1.
+zero Ar40F  +0.2 mass
+print Ar40F
+
+field Ar40C
+wait 2.
+center Ar40C 5E2
+center Ar40C 5E2
+gate Ar40C 1E5 5.
+peak Ar40C
+field Ar40C +0.2 mass
+wait 1.
+zero Ar40C +0.2 mass
+multiplier off
+
+call dem_Kr78C.msr
+
+field Kr78C
+wait 3.
+gate = 0.1
+   collector F
+   checked = false
+   balance Kr78C -0.15 +0.15 mass 5
+center Kr78C 1E2
+center Kr78C 1E2
+gate Kr78C 1E4 10
+peak Kr78C
+field Kr78C -0.2 mass
+wait 1.
+zero Kr78C -0.2 mass
+multiplier off
+
+calculate Kr80C Kr78c Kr84C
+field Kr80C
+wait 3.
+gate = 0.1
+   collector F
+   checked = false
+   balance Kr80C -0.15 +0.15 mass 5
+center Kr80C 1E2
+center Kr80C 1E2
+gate Kr80C 1E4 10
+peak Kr80C
+field Kr80C -0.2 mass
+wait 1.
+zero Kr80C -0.2 mass
+multiplier off
+
+field Kr82C
+wait 3.
+gate = 0.3
+   collector F
+   checked = false
+   balance Kr82C -0.15 +0.15 mass 5
+center Kr82C 1E2
+center Kr82C 1E2
+gate Kr82C 1E4 10
+peak Kr82C
+field Kr82C -0.2 mass
+wait 1.
+zero Kr82C -0.2 mass
+multiplier off
+
+calculate Kr83C Kr82C kr84c
+field Kr83C
+wait 3.
+gate = 0.3
+   collector F
+   checked = false
+   balance Kr83C -0.15 +0.15 mass 5
+center Kr83C 1E2
+center Kr83C 1E2
+gate Kr83C 1E4 10
+peak Kr83C
+field Kr83C -0.2 mass
+wait 1.
+zero Kr83C -0.2 mass
+multiplier off
+
+field Kr84C
+wait 3.
+gate = 0.1
+   collector F
+   checked = false
+   balance Kr84C -0.15 +0.15 mass 5
+center Kr84C 1E2
+center Kr84C 1E2
+gate Kr84C 1E4 10
+peak Kr84C
+field Kr84C -0.2 mass
+wait 1.
+zero Kr84C -0.2 mass
+multiplier off
+
+calculate Kr86C Kr84C
+field Kr86C
+wait 3.
+gate = 0.1
+   collector F
+   checked = false
+   balance Kr86C -0.15 +0.15 mass 5
+center Kr86C 1E2
+center Kr86C 1E2
+gate Kr86C 1E4 10
+peak Kr86C
+field Kr86C -0.2 mass
+wait 1.
+zero Kr86C -0.2 mass
+multiplier off
+
+call dem_Xe124C.msr
+
+calculate Xe124C Kr86C Xe129C
+field Xe124C
+wait 3
+gate = 0.1
+   collector F
+   checked = false
+   balance Xe124C -0.25 +0.25 mass 5
+center Xe124C 1E2
+center Xe124C 1E2
+gate Xe124C 1E4 10
+peak Xe124C
+field Xe124C +0.5 mass
+wait 1.
+zero Xe124C +0.5 mass 
+multiplier off
+
+calculate Xe126C Kr86C Xe129C
+field Xe126C
+wait 3
+gate = 0.1
+   collector F
+   checked = false
+   balance Xe126C -0.25 +0.25 mass 5
+center Xe126C 1E2
+center Xe126C 1E2
+gate Xe126C 1E4 10
+peak Xe126C
+field Xe126C +0.5 mass
+wait 1.
+zero Xe126C +0.5 mass 
+multiplier off
+
+calculate Xe128C Xe126C Xe129c
+field Xe128C
+wait 3
+gate = 0.1
+   collector F
+   checked = false
+   balance Xe128C -0.25 +0.25 mass 5 
+center Xe128C 1E2
+center Xe128C 1E2
+gate Xe128C 1E4 10
+peak Xe128C
+field Xe128C +0.5 mass
+wait 1.
+zero Xe128C +0.5 mass 
+multiplier off
+
+field Xe129C
+wait 3.
+center Xe129C 1E2
+center Xe129C 1E2
+gate Xe129C 1E4 10
+peak Xe129C
+field Xe129C +0.5 mass
+wait 1.
+zero Xe129C +0.5 mass
+multiplier off
+
+calculate Xe130C Xe129C
+field Xe130C
+wait 3
+gate = 0.1
+   collector F
+   checked = false
+   balance Xe130C -0.25 +0.25 mass 5
+center Xe130C 1E2
+center Xe130C 1E2
+gate Xe130C 1E4 10
+peak Xe130C
+field Xe130C +0.5 mass
+wait 1.
+zero Xe130C +0.5 mass 
+multiplier off
+
+calculate Xe131C Xe130C
+field Xe131C
+wait 3
+gate = 0.1
+   collector F
+   checked = false
+   balance Xe131C -0.25 +0.25 mass 5
+center Xe131C 1E2
+center Xe131C 1E2
+gate Xe131C 1E4 10
+peak Xe131C
+field Xe131C +0.5 mass
+wait 1.
+zero Xe131C +0.5 mass 
+multiplier off
+
+field Xe132C
+wait 3.
+center Xe132C 1E2
+center Xe132C 1E2
+gate Xe132C 1E4 10
+peak Xe132C
+field Xe132C +0.5 mass
+wait 1.
+zero Xe132C +0.5 mass
+multiplier off
+
+calculate Xe134C Xe132C
+field Xe134C
+wait 3
+gate = 0.1
+   collector F
+   checked = false
+   balance Xe134C -0.25 +0.25 mass 5 
+center Xe134C 1E2
+center Xe134C 1E2
+gate Xe134C 1E4 10
+peak Xe134C
+field Xe134C +0.5 mass
+wait 1.
+zero Xe134C +0.5 mass 
+multiplier off
+
+calculate Xe136C Xe134C
+field Xe136C
+wait 3
+gate = 0.1
+   collector F
+   checked = false
+   balance Xe136C -0.25 +0.25 mass 5
+center Xe136C 1E2
+center Xe136C 1E2
+gate Xe136C 1E4 10
+peak Xe136C
+field Xe136C +0.5 mass
+wait 1.
+zero Xe136C +0.5 mass 
+multiplier off
+
+
+{read all isotopes, 7 cycles}
+{---------------------------}
+
+repeat
+
+call dem_Ar40C.msr
+
+field Ar40F
+wait 2
+gate = 0.1
+collector C
+  checked = false
+  balance Ar40F -0.2 +0.2 mass 15
+center Ar40F 1E-2 
+center Ar40F 1E-2
+gate = 4
+peak Ar40F
+field Ar40F +0.2 mass
+wait 1.
+zero Ar40F  +0.2 mass
+print Ar40F
+
+field Ar40C
+wait 2
+center Ar40C 5E2
+center Ar40C 5E2
+   failure display     Ar40C not    centered
+gate Ar40C 1E5 5
+peak Ar40C
+field Ar40C +0.2 mass
+wait 1.
+zero Ar40C +0.2 mass
+multiplier off
+
+call dem_Kr78C.msr
+
+field Kr78C
+wait 3.
+center Kr78C 1E2
+center Kr78C 1E2
+   failure display     Kr78C not    centered
+gate Kr78C 1E4 10
+peak Kr78C
+field Kr78C -0.2 mass
+wait 1.
+zero Kr78C -0.2 mass
+multiplier off
+
+field Kr80C
+wait 3.
+center Kr80C 1E2
+center Kr80C 1E2
+   failure display     Kr80C not    centered
+gate Kr80C 1E4 10
+peak Kr80C
+field Kr80C -0.2 mass
+wait 1.
+zero Kr80C -0.2 mass
+multiplier off
+
+field Kr82C
+wait 3.
+center Kr82C 1E2
+center Kr82C 1E2
+   failure display     Kr82C not    centered
+gate Kr82C 1E4 10
+peak Kr82C
+field Kr82C -0.2 mass
+wait 1.
+zero Kr82C -0.2 mass
+multiplier off
+
+field Kr83C
+wait 3.
+center Kr83C 1E2
+center Kr83C 1E2
+   failure display     Kr83C not    centered
+gate Kr83C 1E4 10
+peak Kr83C
+field Kr83C -0.2 mass
+wait 1.
+zero Kr83C -0.2 mass
+multiplier off
+
+field Kr84C
+wait 3.
+center Kr84C 1E2
+center Kr84C 1E2
+   failure display     Kr84C not    centered
+gate Kr84C 1E4 10
+peak Kr84C
+field Kr84C -0.2 mass
+wait 1.
+zero Kr84C -0.2 mass
+multiplier off
+
+field Kr86C
+wait 3.
+center Kr86C 1E2
+center Kr86C 1E2
+   failure display     Kr86C not    centered
+gate Kr86C 1E4 10
+peak Kr86C
+field Kr86C -0.2 mass
+wait 1.
+zero Kr86C -0.2 mass
+multiplier off
+
+call dem_Xe124C.msr
+
+field Xe124C
+wait 3.
+center Xe124C 1E2
+center Xe124C 1E2
+   failure display     Xe124C not    centered
+gate Xe124C 1E4 10
+peak Xe124C
+field Xe124C +0.5 mass
+wait 1.
+zero xe124C +0.5 mass
+multiplier off
+
+field Xe126C
+wait 3.
+center Xe126C 1E2
+center Xe126C 1E2
+   failure display     Xe126C not    centered
+gate Xe126C 1E4 10
+peak Xe126C
+field Xe126C +0.5 mass
+wait 1.
+zero xe126C +0.5 mass
+multiplier off
+
+field Xe128C
+wait 3.
+center Xe128C 1E2
+center Xe128C 1E2
+   failure display     Xe128C not    centered
+gate Xe128C 1E4 10
+peak Xe128C
+field Xe128C +0.5 mass
+wait 1.
+zero xe128C +0.5 mass
+multiplier off
+
+field Xe129C
+wait 3.
+center Xe129C 1E2
+center Xe129C 1E2
+   failure display     Xe129C not    centered
+gate Xe129C 1E4 10
+peak Xe129C
+field Xe129C +0.5 mass
+wait 1.
+zero xe129C +0.5 mass
+multiplier off
+
+field Xe130C
+wait 3.
+center Xe130C 1E2
+center Xe130C 1E2
+   failure display     Xe130C not    centered
+gate Xe130C 1E4 10
+peak Xe130C
+field Xe130C +0.5 mass
+wait 1.
+zero xe130C +0.5 mass
+multiplier off
+
+field Xe131C
+wait 3.
+center Xe131C 1E2
+center Xe131C 1E2
+   failure display     Xe131C not    centered
+gate Xe131C 1E4 10
+peak Xe131C
+field Xe131C +0.5 mass
+wait 1.
+zero xe131C +0.5 mass
+multiplier off
+
+field Xe132C
+wait 3.
+center Xe132C 1E2
+center Xe132C 1E2
+   failure display     Xe132C not    centered
+gate Xe132C 1E4 10
+peak Xe132C
+field Xe132C +0.5 mass
+wait 1.
+zero xe132C +0.5 mass
+multiplier off
+
+field Xe134C
+wait 3.
+center Xe134C 1E2
+center Xe134C 1E2
+   failure display     Xe134C not    centered
+gate Xe134C 1E4 10
+peak Xe134C
+field Xe134C +0.5 mass
+wait 1.
+zero xe134C +0.5 mass
+multiplier off
+
+field Xe136C
+wait 3.
+center Xe136C 1E2
+center Xe136C 1E2
+   failure display     Xe136C not    centered
+gate Xe136C 1E4 10
+peak Xe136C
+field Xe136C +0.5 mass
+wait 1.
+zero xe136C +0.5 mass
+multiplier off
+
+until 7
+
+event pumpout
+
+{regression}
+{----------}
+
+output write regression Ar40C
+output write regression Kr78C
+output write regression Kr80C
+output write regression Kr82C
+output write regression Kr83C
+output write regression Kr84C
+output write regression Kr86C
+output write regression Xe124C
+output write regression Xe126C
+output write regression Xe128C
+output write regression Xe129C
+output write regression Xe130C
+output write regression Xe131C
+output write regression Xe132C
+output write regression Xe134C
+output write regression Xe136C
+
+write standard Ar 40 1.0000E-08
+write standard Kr 78 1.7434E-12
+write standard Kr 80 1.1342E-11
+write standard Kr 82 5.7903E-11
+write standard Kr 83 5.7671E-11
+write standard Kr 84 2.8641E-10
+write standard Kr 86 8.7424E-11
+write standard Xe124 4.7470E-13
+write standard Xe126 4.4289E-13
+write standard Xe128 9.5772E-12
+write standard Xe129 1.3195E-10
+write standard Xe130 2.0314E-11
+write standard Xe131 1.0589E-10
+write standard Xe132 1.3421E-10
+write standard Xe134 5.2060E-11
+write standard Xe136 4.4209E-11
+
+digest
+display OP S2
+wait 0:30
+call magnet_nacht.msr
+wait 1:00
+display Measurement done
+close

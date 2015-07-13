@@ -1,0 +1,66 @@
+{ Fast-Cal He and Ne in MAP}
+{ Plus Residual }
+{ 04.05.2009}
+{--------------------------}
+display Magnet_Setup  is running
+measure run magnet_setup.msr
+timer halt
+wait 0:02
+valve close all
+output extension HN
+wait 0:10
+display    CL S8     S10,S11 CL?
+wait 0:30
+display COAL4: N2
+
+{FastCal HeNe in MAP, bottle 7}
+wait 0:15
+valve open 100
+wait 0:40
+valve close 100
+wait 0:40
+display    open front   1.5 NM
+wait 0:40
+display   close front   1.5 NM
+wait 0:40
+display Valves OK?
+wait 0:15
+
+header type F
+header bottle 7
+header dilution .999500887
+header cal +1
+
+wait 0:15
+display CL S2
+wait 0:30
+display OP S1
+event inlet
+wait 0:02
+
+measure run fc2_hn.msr
+
+wait 3:00
+timer halt
+event separation
+measure go
+
+display OP S8
+wait 0:20
+display      WAIT TILL   END OF FC
+timer halt
+
+{Residual in MAP}
+{---------------}
+display REFILL N2 COAL4
+header type R
+wait 5:00
+display CL S2
+event closure
+wait 0:10
+
+measure run r2_hn.msr
+wait 0:30
+timer halt
+display   valves to IC  CL S1 OP S2,S5
+close

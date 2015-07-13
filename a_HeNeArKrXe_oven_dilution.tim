@@ -1,0 +1,189 @@
+{ Blank A_HeNeArKrXe_Oven in MAP}
+{ 14.08.2012}
+{ Updated on 13.02.2015 due to new Ar procedure }
+
+{--------------------------}
+
+display Magnet_Setup  is running
+measure run magnet_setup.msr
+
+at 0:02
+valve close all
+at 0:10
+display    SET-UP OVEN
+at 0:45
+display   close valves  2,4,10,11
+at 1:30
+display  Drop Al in oven 
+at 3:00
+display     Heat oven    When done TG
+at 4:30
+display   cold trap to   -130 °C
+at 6:30
+display   Ln2 to coal 12 S4,KT
+at 10:00
+display    refill Ln2    12,S4,KT
+at 15:00
+display    refill Ln2    12,S4,KT
+at 20:00
+display    refill Ln2    12,S4,KT
+at 25:00
+display    refill Ln2    12,S4,KT
+at 30:00
+display    refill Ln2    12,S4,KT
+at 35:00
+display Wait till oven  cools to 500C
+timer halt
+display close valve 12
+wait 0:20
+display open valve 11
+wait 5:00
+display    refill Ln2    12,S4,KT
+wait 1:00
+display   cold trap to   coal 10
+wait 4:00
+display    refill Ln2    12,S4,KT
+wait 5:00
+display    refill Ln2    12,S4,KT
+wait 1:00
+display   close valves  13,15
+wait 0:30
+display close valve S8
+wait 0:15
+display open valve 12
+wait 0:15
+valve open 110
+wait 0:02
+
+call magnet_setup.msr
+
+header type A
+output extension HN
+
+display close valve S2
+wait 0:20
+display open valve S1
+wait 0:15
+event inlet
+wait 0:02
+
+measure run a_HeNe.msr
+
+timer halt
+
+display close valve S5
+wait 0:15
+valve close 110
+wait 0:02
+display open valve S8
+wait 0:15
+display   close valves  11,12
+wait 0:45
+display open 4
+wait 0:30
+display   open valves   2,10,13,15
+wait 1:00
+display coal12 to 180°C
+
+wait 2:00
+display close valve 5
+wait 0:30
+display   Is 5 closed?  Open 11
+wait 5:00
+display    REFILL LN2:  S4, KT
+wait 5:00
+display    REFILL LN2:  S4, KT
+wait 5:00
+display    REFILL LN2:  S4, KT
+wait 5:00
+display  LN2: COAL12    REFILL LN2:S4,KT
+wait 5:00
+display   REFILL LN2:   S4, 12, KT
+wait 5:00
+display REFILL LN2:S4,12 KT on -135°C
+wait 5:00 
+display close 10, 11
+wait 0:30
+display Is 10,11 closed? Open 5
+wait 0:30
+display COAL10 to 180°C
+wait 1:00
+display COAL12 to 180°C
+wait 1:00
+
+timer halt
+display    Close 13,15  Open 12
+
+wait 12:00
+
+
+output extension AR
+header type A
+
+display CL S4,S7,S8
+wait 1:00
+valve open 110
+wait 2:00
+display CL S9
+wait 0:20
+display OP S8
+wait 2:00
+display CL S8
+wait 0:20
+display OP S9
+wait 2:00
+display CL S2
+wait 0:30
+display OP S1
+wait 0:02
+event inlet
+
+measure run a_ArKX.msr
+timer halt
+display Close S1
+wait 0:15
+valve close 110
+display OP S8, S4, S7
+wait 1:00
+display OP 11, 13, 15
+wait 0:45
+display     WAIT UNTIL   END OF AR
+timer halt
+
+display Are you ready?  Press GO
+timer halt
+
+output extension KX
+header type A
+
+display CL 5,6,7,8,9
+wait 1:00
+display CL 13,15
+wait 0:30
+display OP 10
+wait 0:30
+display CL S8, S4, S7
+wait 2:00
+valve open 110
+wait 0:10
+display CL S2
+wait 0:30
+display OP S1
+wait 0:02
+event inlet
+
+measure run a_KrXe.msr
+
+timer halt
+
+display CL S1
+wait 0:15
+valve close 110
+wait 0:10
+display OP S8, S4, S7
+wait 1:00
+display OP 13,15
+wait 0:30
+display OP 5,6,7,8,9
+wait 1:00
+display WAIT FOR END OF KR,XE
