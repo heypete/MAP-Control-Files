@@ -2,7 +2,8 @@
 {28.01.2015}
 
 {--------------------------}
-
+valve open 114
+valve open 115
 display AIR VALVE open?
 wait 0:20
 display close SV

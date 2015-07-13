@@ -1,3 +1,5 @@
+valve open 114
+valve open 115
 mul off
 item H2F
 try =  true

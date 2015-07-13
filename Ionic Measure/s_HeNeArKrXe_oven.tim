@@ -7,6 +7,9 @@ measure run magnet_setup.msr
 
 at 0:02
 valve close all
+wait 0:02
+valve open 114
+valve open 115
 at 0:10
 display    SET-UP OVEN
 at 0:45
