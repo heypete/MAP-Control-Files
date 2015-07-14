@@ -8,6 +8,9 @@ timer halt
 
 wait 0:02
 valve close all
+wait 0:02
+valve open 114
+valve open 115
 output extension AR
 wait 0:10
 display    CL S4,S8   S10,S11 CL?

@@ -7,6 +7,9 @@ measure run magnet_setup.msr
 timer halt
 wait 0:02
 valve close all
+wait 0:02
+valve open 114
+valve open 115
 output extension HN
 wait 0:10
 display    CL S8     S10,S11 CL?
