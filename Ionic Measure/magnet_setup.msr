@@ -17,5 +17,6 @@ wait 4.
 
 until 5
 field H2C -0.2
+timer go
 close
 
